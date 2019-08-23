@@ -8,7 +8,7 @@
 
 [Check out a demo!](https://netlify-cms-widget-youtube.netlify.com/#/collections/test/entries/youtube_test)
 
-Provides a simple text input for youtube videos. Validates strings with a green text color and provides a preview image in the preview pane.
+Based on https://github.com/hennessyevan/netlify-cms-widget-youtube
 
 ### Looking for suggestions for additional functionality. PRs are Welcome!
 
@@ -19,11 +19,11 @@ Provides a simple text input for youtube videos. Validates strings with a green 
 As an npm package:
 
 ```shell
-npm install --save netlify-cms-widget-youtube
+npm install --save netlify-cms-widget-youtube-expanded
 ```
 
 ```js
-import youtube from "netlify-cms-widget-youtube";
+import youtube from "netlify-cms-widget-youtube-expanded";
 
 CMS.registerWidget("youtube", youtubeControl, youtubePreview);
 ```
