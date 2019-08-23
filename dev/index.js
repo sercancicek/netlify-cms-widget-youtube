@@ -24,7 +24,7 @@ const config = {
 							label: "Youtube",
 							widget: "youtube",
 							extraInfo: true,
-							APIkey: "AIzaSyB1-hj06noPkeA7RHv07Hex3E53M87RMJE"
+							APIkey: "AIzaSyAln9Zizqc3_r8zozq4OcmqwwsUOXRJtuE"
 						}
 					]
 				}
