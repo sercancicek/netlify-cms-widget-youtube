@@ -41,7 +41,8 @@ export default class Control extends React.Component {
 					title: data.title,
 					description: data.description,
 					publishedAt: data.publishedAt,
-					tags: data.tags
+					tags: data.tags,
+					viewCount: data.viewCount,
 				});
 			} catch (err) {
 				console.error("Not a valid Youtube URL");
@@ -55,14 +56,15 @@ export default class Control extends React.Component {
 		const { id = "" } = urlParser.parse(url) || "";
 		const APIKey = this.props.field.get("APIkey");
 		const data = fetch(
-			`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${APIKey}`
+			`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${id}&key=${APIKey}`
 		)
 			.then(res => res.json())
 			.then(json => {
+				console.log({ json });
 				if (json !== undefined) {
 					this.setState({
 						valid: true,
-						data: { ...json.items[0].snippet, url }
+						data: { ...json.items[0].snippet, ...json.items[0].statistics, url },
 					});
 				} else {
 					this.setState({ valid: false });
@@ -107,6 +109,11 @@ export default class Control extends React.Component {
 		this.setState({ data: { ...data, description: e.target.value } })
 	}
 
+	handleDescriptionChange = (e) => {
+		const { data } = this.state;
+		this.setState({ data: { ...data, tags: e.target.value } })
+	}
+
 	render() {
 		const {
 			forID,
@@ -119,8 +126,8 @@ export default class Control extends React.Component {
 		const { valid } = this.state;
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
-
 		const { data } = this.state;
+		console.log({ data });
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
@@ -237,6 +244,33 @@ export default class Control extends React.Component {
 						style={{ minHeight: "140px", height: "58px" }}
 						value={data.description}
 						onChange={this.handleDescriptionChange}
+					/>
+				</div>
+				<div>
+					<label
+						style={{
+							backgroundColor: "#dfdfe3",
+							border: "0",
+							borderRadius: "3px 3px 0 0",
+							color: "#7a8291",
+							fontSize: "12px",
+							fontWeight: "600",
+							margin: "0",
+							padding: "3px 6px 2px",
+							position: "relative",
+							textTransform: "uppercase",
+							transition: "all .2s ease"
+						}}
+					>
+						Anahtar Kelimeler
+				</label>
+					<input
+						type="text"
+						className={classNameWrapper}
+						placeholder="Anahtar Kelimeler"
+						style={{ width: "100%", fontSize: "1rem", marginBottom: "20px" }}
+						value={data.tags}
+						onChange={this.handleTagsChange}
 					/>
 				</div>
 			</div >
