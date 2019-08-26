@@ -1,5 +1,5 @@
 {
-	"name": "netlify-cms-widget-youtube-expanded",
+	"name": "netlify-cms-widget-youtube-extended",
 	"author": "Evan Hennessy",
 	"description": "A netlify widget for youtube embeds.",
 	"keywords": [
@@ -9,7 +9,7 @@
 		"widget",
 		"youtube"
 	],
-	"version": "0.3.0",
+	"version": "0.3.2",
 	"repository": "https://github.com/hennessyevan/netlify-cms-widget-youtube",
 	"homepage": "https://github.com/hennessyevan/netlify-cms-widget-youtube",
 	"license": "MIT",

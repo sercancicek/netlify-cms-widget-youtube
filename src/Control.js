@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
 import urlParser from "js-video-url-parser";
+import CMS from "netlify-cms";
+
 
 export default class Control extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { valid: false, data: {}};
+		this.state = { valid: false, data: {} };
 	}
 	static propTypes = {
 		onChange: PropTypes.func.isRequired,
@@ -98,12 +100,12 @@ export default class Control extends React.Component {
 
 	handleTitleChange = (e) => {
 		const { data } = this.state;
-		this.setState({ data: { ...data, title: e.target.value }})
+		this.setState({ data: { ...data, title: e.target.value } })
 	}
 
 	handleDescriptionChange = (e) => {
 		const { data } = this.state;
-		this.setState({ data: { ...data, description: e.target.value }})
+		this.setState({ data: { ...data, description: e.target.value } })
 	}
 
 	render() {
@@ -115,129 +117,116 @@ export default class Control extends React.Component {
 			setActiveStyle,
 			setInactiveStyle
 		} = this.props;
+		const stringControl = CMS.getWidget("markdown").control;
 		const { valid } = this.state;
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
 
 		const { data } = this.state;
 		return (
-			<div
-				className="nc-imageControl-imageUpload"
-				id={forID}
-				className={classNameWrapper}
-				onFocus={setActiveStyle}
-				onBlur={setInactiveStyle}>
-				<span className="nc-imageControl-message">
-					<div className="nc-imageControl-content">
-						<div
-							style={{ flexShrink: 0, width: 120, height: 82 }}
-							className="nc-imageControl-imageWrapper">
-							<img
-								src={data.thumbnails && data.thumbnails.default.url}
-								style={{
-									width: 120,
-									height: 67.5,
-									objectFit: "cover"
-								}}
-								alt={data.title}
-							/>
-						</div>
-						<div
-							className="nc-imageControl-textWrapper"
-							style={{
-								width: "100%",
-							}}
-						>
-							<div className="nc-controlPane-control" style={{ marginTop: 0 }}>
-								<ul className="nc-controlPane-errors"></ul>
-								<label className="nc-controlPane-label" for="youtube_widget4">Youtube URL</label>
-								<div className="nc-controlPane-widget" id="youtube_widget1">
-									<span className="nc-imageControl-message">
-										<input
-											type="text"
-											style={{
-												width: "100%",
-												fontSize: "1rem"
-											}}
-											value={extraInfo ? value.url : value}
-											valid={valid}
-											placeholder={`Youtube URL`}
-											onChange={this.fetchFromAPI}
-										/>
-									</span>
-								</div>
-							</div>
-							<div className="nc-controlPane-control">
-								<ul className="nc-controlPane-errors"></ul>
-								<label className="nc-controlPane-label" for="youtube_widget4">Başlık</label>
-								<div className="nc-controlPane-widget" id="youtube_widget1">
-									<span className="nc-imageControl-message">
-										<input
-											type="text"
-											placeholder="Başlık"
-											style={{ width: "100%", fontSize: "1rem" }}
-											value={data.title}
-											onChange={this.handleTitleChange}
-										/>
-									</span>
-								</div>
-							</div>
-							<div className="nc-controlPane-control">
-								<ul className="nc-controlPane-errors"></ul>
-								<label className="nc-controlPane-label" for="description">Açıklama</label>
-								<textarea
-									id="description"
-									className="nc-controlPane-widget"
-									style={{ minHeight: "140px", height: "58px" }}
-									value={data.description}
-									onChange={this.handleDescriptionChange}
-								/>
-							</div>
-							{/* <div className="nc-controlPane-control">
-								<ul className="nc-controlPane-errors"></ul>
-								<label className="nc-controlPane-label" for="publishedAt">Yayım Tarihi</label>
-								<div className="nc-controlPane-widget" id="publishedAt">
-									<span className="nc-imageControl-message">
-										<input
-											type="text"
-											placeholder="Yayım Tarihi"
-											style={{ width: "100%", fontSize: "1rem" }}
-											value={data.publishedAt}
-										/>
-									</span>
-								</div>
-							</div>
-							<div className="nc-controlPane-control">
-								<ul className="nc-controlPane-errors"></ul>
-								<label className="nc-controlPane-label" for="keywords">Anahtar Kelimeler</label>
-								<div className="nc-controlPane-widget" id="keywords">
-									<span className="nc-imageControl-message">
-										<input
-											type="text"
-											placeholder="Yayım Tarihi"
-											style={{ width: "100%", fontSize: "1rem" }}
-											value={data.tags && data.tags.join(', ')}
-										/>
-									</span>
-								</div>
-							</div> */}
-							<span
-								style={{
-									position: "absolute",
-									bottom: -2,
-									right: -2,
-									padding: "5px 10px",
-									borderRadius: "5px 0",
-									color: "white",
-									backgroundColor: "#00A86B"
-								}}
-								className="nc-imageControl-validation">
-								✓
-									</span>
-						</div>
-					</div>
-				</span>
-			</div>
+			<div id={forID} className={classNameWrapper}>
+				{
+					data.title &&
+					<img
+						src={data.thumbnails && data.thumbnails.default.url}
+						style={{
+							width: 120,
+							height: 67.5,
+							objectFit: "cover",
+							marginBottom: "20px",
+						}}
+						alt={data.title}
+					/>
+				}
+				<div>
+					<label
+						style={{
+							backgroundColor: "#dfdfe3",
+							border: "0",
+							borderRadius: "3px 3px 0 0",
+							color: "#7a8291",
+							fontSize: "12px",
+							fontWeight: "600",
+							margin: "0",
+							padding: "3px 6px 2px",
+							position: "relative",
+							textTransform: "uppercase",
+							transition: "all .2s ease"
+						}}
+					>
+						Youtube URL
+				</label>
+					<input
+						type="text"
+						style={{
+							width: "100%",
+							fontSize: "1rem",
+							marginBottom: "20px",
+						}}
+						id={`${classNameWrapper}_url`}
+						className={classNameWrapper}
+						value={extraInfo ? value.url : value}
+						valid={valid}
+						placeholder={`Youtube URL`}
+						onChange={this.fetchFromAPI}
+					/>
+				</div>
+
+				<div>
+					<label
+						style={{
+							backgroundColor: "#dfdfe3",
+							border: "0",
+							borderRadius: "3px 3px 0 0",
+							color: "#7a8291",
+							fontSize: "12px",
+							fontWeight: "600",
+							margin: "0",
+							padding: "3px 6px 2px",
+							position: "relative",
+							textTransform: "uppercase",
+							transition: "all .2s ease"
+						}}
+					>
+						Başlık
+				</label>
+					<input
+						type="text"
+						className={classNameWrapper}
+						placeholder="Başlık"
+						style={{ width: "100%", fontSize: "1rem", marginBottom: "20px" }}
+						value={data.title}
+						onChange={this.handleTitleChange}
+					/>
+				</div>
+				<div>
+					<label
+						style={{
+							backgroundColor: "#dfdfe3",
+							border: "0",
+							borderRadius: "3px 3px 0 0",
+							color: "#7a8291",
+							fontSize: "12px",
+							fontWeight: "600",
+							margin: "0",
+							padding: "3px 6px 2px",
+							position: "relative",
+							textTransform: "uppercase",
+							transition: "all .2s ease"
+						}}
+					>
+						Açıklama
+					</label>
+					<textarea
+						id="description"
+						className={classNameWrapper} n
+						className="nc-controlPane-widget"
+						style={{ minHeight: "140px", height: "58px" }}
+						value={data.description}
+						onChange={this.handleDescriptionChange}
+					/>
+				</div>
+			</div >
 		);
 	}
 }
