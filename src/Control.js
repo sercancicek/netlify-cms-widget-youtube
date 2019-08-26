@@ -217,7 +217,23 @@ export default class Control extends React.Component {
 					<textarea
 						id="description"
 						className={classNameWrapper} n
-						className="nc-controlPane-widget"
+						style={{
+							backgroundColor: "#fff",
+							border: "2px solid #dfdfe3",
+							borderRadius: "5px",
+							borderTopLeftTadius: "0",
+							boxShadow: "none",
+							color: "#444a57",
+							display: "block",
+							fontSize: "15px",
+							lineHeight: "1.5",
+							margin: "0",
+							outline: "0",
+							padding: "16px 20px",
+							position: "relative",
+							transition: "border-color .2s ease",
+							width: "100%"
+						}}
 						style={{ minHeight: "140px", height: "58px" }}
 						value={data.description}
 						onChange={this.handleDescriptionChange}

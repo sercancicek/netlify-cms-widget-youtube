@@ -22,7 +22,7 @@ const config = {
 						{
 							name: "youtube_widget",
 							label: "Youtube",
-							widget: "youtube2",
+							widget: "youtube",
 							extraInfo: true,
 							APIkey: "AIzaSyAln9Zizqc3_r8zozq4OcmqwwsUOXRJtuE"
 						}
