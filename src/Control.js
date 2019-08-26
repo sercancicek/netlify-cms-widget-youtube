@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import urlParser from "js-video-url-parser";
-import CMS from "netlify-cms";
 
 
 export default class Control extends React.Component {
@@ -117,7 +116,6 @@ export default class Control extends React.Component {
 			setActiveStyle,
 			setInactiveStyle
 		} = this.props;
-		const stringControl = CMS.getWidget("markdown").control;
 		const { valid } = this.state;
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
