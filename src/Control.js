@@ -163,7 +163,6 @@ export default class Control extends React.Component {
 							fontSize: "1rem",
 							marginBottom: "20px",
 						}}
-						id={`${classNameWrapper}_url`}
 						className={classNameWrapper}
 						value={extraInfo ? value.url : value}
 						valid={valid}
