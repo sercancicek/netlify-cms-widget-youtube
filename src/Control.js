@@ -29,10 +29,13 @@ export default class Control extends React.Component {
 		if (this.props.value === '') {
 			return
 		}
-		const { entries } = this.props.value._root
+		let { entries } = this.props.value._root
 		console.log({ 11: entries });
 		// const entries = nodes.map(n => n.entries || n.entry)
 		// console.log({ 12: entries });
+		if (!entries) {
+			entries = this.props.value._root.nodes.map(x => x.entry)
+		}
 
 		if (entries) {
 			this.setState({
@@ -42,7 +45,7 @@ export default class Control extends React.Component {
 					description: entries.find(x => x.includes("description"))[1],
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
 					tags: entries.find(x => x.includes("tags"))[1]._tail.array.join(),
-					viewCount: entries.find(x => x.includes("url"))[1],
+					viewCount: entries.find(x => x.includes("viewCount"))[1],
 					thumbnails: {
 						default: {
 							url: entries.find(x => x.includes("imageURL"))[1]
