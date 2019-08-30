@@ -36,7 +36,10 @@ export default class Control extends React.Component {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
 		 console.log({ 12: entries });
-
+		let tags = entries.find(x => x.includes("tags"))[1];
+		if (tags && tags._tail) {
+			tags = tags._tail.array.join();
+		}
 		if (entries) {
 			this.setState({
 				data: {
