@@ -29,11 +29,11 @@ export default class Control extends React.Component {
 		if (this.props.value === '') {
 			return
 		}
-		const { nodes} = this.props.value._root
+		const { nodes } = this.props.value._root
 		console.log({ 11: nodes });
 		const entries = nodes.map(n => n.entry)
 		console.log({ 12: entries });
-		
+
 		if (entries) {
 			this.setState({
 				data: {
@@ -43,6 +43,11 @@ export default class Control extends React.Component {
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
 					tags: entries.find(x => x.includes("tags"))[1]._tail.array.join(),
 					viewCount: entries.find(x => x.includes("url"))[1],
+					thumbnails: {
+						default: {
+							url: entries.find(x => x.includes("imageURL"))[1]
+						}
+					}
 				}
 			})
 		}
@@ -54,16 +59,11 @@ export default class Control extends React.Component {
 		if (valid && hasDataChanged) {
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
-				const videoInfo = urlParser.parse(data.url);
 				this.props.onChange({
 					url: data.url,
 					id: id,
 					mediaType: mediaType,
-					imageURL: urlParser.create({
-						videoInfo,
-						format: "longImage",
-						params: { imageQuality: "maxresdefault" }
-					}),
+					imageURL: data.thumbnails.default.url,
 					title: data.title,
 					description: data.description,
 					publishedAt: data.publishedAt,
