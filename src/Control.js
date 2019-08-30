@@ -47,7 +47,7 @@ export default class Control extends React.Component {
 					title: entries.find(x => x.includes("title"))[1],
 					description: entries.find(x => x.includes("description"))[1],
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
-					tags: entries.find(x => x.includes("tags"))[1]._tail.array.join(),
+					tags,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
 					thumbnails: {
 						default: {
