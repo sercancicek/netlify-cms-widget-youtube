@@ -8,6 +8,8 @@ export default class Preview extends React.Component {
 		this.state = {
 			videoInfo: {}
 		};
+		console.log({props});
+
 	}
 
 	getImage(videoInfo) {

@@ -48,7 +48,8 @@ export default class Control extends React.Component {
 							url: entries.find(x => x.includes("imageURL"))[1]
 						}
 					}
-				}
+				},
+				valid: true,
 			})
 		}
 	}
