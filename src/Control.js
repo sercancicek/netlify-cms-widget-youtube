@@ -29,8 +29,10 @@ export default class Control extends React.Component {
 		if (this.props.value === '') {
 			return
 		}
-		const { value: { _root: { nodes } } } = this.props;
+		const { nodes} = this.props.value._root
+		console.log({ 11: nodes });
 		const entries = nodes.map(n => n.entries)
+		console.log({ 12: entries });
 		
 		if (entries) {
 			this.setState({
