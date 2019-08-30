@@ -195,7 +195,7 @@ export default class Control extends React.Component {
 							marginBottom: "20px",
 						}}
 						className={classNameWrapper}
-						value={extraInfo ? value.url : value}
+						value={data.url}
 						valid={valid}
 						placeholder={`Youtube URL`}
 						onChange={this.fetchFromAPI}
