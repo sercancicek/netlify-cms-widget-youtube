@@ -32,10 +32,10 @@ export default class Control extends React.Component {
 		let { entries } = this.props.value._root
 		console.log({ 11: entries });
 		// const entries = nodes.map(n => n.entries || n.entry)
-		// console.log({ 12: entries });
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
+		 console.log({ 12: entries });
 
 		if (entries) {
 			this.setState({
