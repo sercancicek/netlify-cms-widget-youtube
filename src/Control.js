@@ -31,7 +31,7 @@ export default class Control extends React.Component {
 		}
 		const { nodes } = this.props.value._root
 		console.log({ 11: nodes });
-		const entries = nodes.map(n => n.entry)
+		const entries = nodes.map(n => n.entries || n.entry)
 		console.log({ 12: entries });
 
 		if (entries) {
