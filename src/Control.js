@@ -59,7 +59,7 @@ export default class Control extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const { data, valid } = this.state;
-		const hasDataChanged = (data.title !== prevState.data.title);
+		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
@@ -71,7 +71,7 @@ export default class Control extends React.Component {
 					title: data.title,
 					description: data.description,
 					publishedAt: data.publishedAt,
-					tags: data.tags,
+					tags: data.tags.join(),
 					viewCount: data.viewCount,
 				});
 			} catch (err) {
@@ -145,7 +145,7 @@ export default class Control extends React.Component {
 		})
 	}
 
-	handleDescriptionChange = (e) => {
+	handleTagsChange = (e) => {
 		const { data } = this.state;
 		this.setState({
 			data: { ...data, tags: e.target.value },
