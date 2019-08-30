@@ -24,6 +24,8 @@ export default class Control extends React.Component {
 
 	componentDidMount() {
 		console.log({ xx: this.props.value });
+		console.log({ yy: this.props.field });
+		console.log({ zz: this.props.field.get('title') });
 		const { value: { map } } = this.props;
 		if (map) {
 			this.setState({
