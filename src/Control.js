@@ -22,10 +22,27 @@ export default class Control extends React.Component {
 		value: ""
 	};
 
+	componentDidMount() {
+		console.log({ xx: this.props.value });
+		const { value: { map } } = this.props;
+		if (map) {
+			this.setState({
+				data: {
+					url: map.url,
+					title: map.title,
+					description: map.description,
+					publishedAt: map.publishedAt,
+					tags: map.tags,
+					viewCount: map.viewCount,
+				}
+			})
+		}
+	}
+
 	componentDidUpdate(prevProps, prevState) {
 		const { data, valid } = this.state;
-		const isDataChanged = (data.title !== prevState.data.title);
-		if (valid && isDataChanged) {
+		const hasDataChanged = (data.title !== prevState.data.title);
+		if (valid && hasDataChanged) {
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
 				const videoInfo = urlParser.parse(data.url);
