@@ -26,16 +26,21 @@ export default class Control extends React.Component {
 		console.log({ xx: this.props.value });
 		console.log({ yy: this.props.field });
 		console.log({ zz: this.props.field.get('title') });
-		const { value: { map } } = this.props;
-		if (map) {
+		if (this.props.value === '') {
+			return
+		}
+		const { value: { _root: { nodes } } } = this.props;
+		const entries = nodes.map(n => n.entries)
+		
+		if (entries) {
 			this.setState({
 				data: {
-					url: map.url,
-					title: map.title,
-					description: map.description,
-					publishedAt: map.publishedAt,
-					tags: map.tags,
-					viewCount: map.viewCount,
+					url: entries.find(x => x.includes("url"))[1],
+					title: entries.find(x => x.includes("title"))[1],
+					description: entries.find(x => x.includes("description"))[1],
+					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
+					tags: entries.find(x => x.includes("tags"))[1]._tail.array.join(),
+					viewCount: entries.find(x => x.includes("url"))[1],
 				}
 			})
 		}
