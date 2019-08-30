@@ -9,7 +9,7 @@
 		"widget",
 		"youtube"
 	],
-	"version": "0.3.15",
+	"version": "0.3.16",
 	"repository": "https://github.com/hennessyevan/netlify-cms-widget-youtube",
 	"homepage": "https://github.com/hennessyevan/netlify-cms-widget-youtube",
 	"license": "MIT",

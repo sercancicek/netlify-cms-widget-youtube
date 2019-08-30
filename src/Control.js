@@ -206,7 +206,7 @@ export default class Control extends React.Component {
 						}}
 						className={classNameWrapper}
 						value={data.url}
-						valid={valid}
+						valid={`${valid}`}
 						placeholder={`Youtube URL`}
 						onChange={this.fetchFromAPI}
 					/>
