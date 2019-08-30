@@ -25,7 +25,7 @@ export default class Preview extends React.Component {
 		const { url, id, mediaType, provider = "youtube" } = value;
 		const { imageURL = "" } = this.getImage({ url, id, mediaType, provider });
 
-		console.log(value);
+		console.log({value});
 
 		return (
 			<div className="yt-widgetPreview">

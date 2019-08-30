@@ -127,17 +127,26 @@ export default class Control extends React.Component {
 
 	handleTitleChange = (e) => {
 		const { data } = this.state;
-		this.setState({ data: { ...data, title: e.target.value } })
+		this.setState({
+			data: { ...data, title: e.target.value },
+			valid: true,
+		})
 	}
 
 	handleDescriptionChange = (e) => {
 		const { data } = this.state;
-		this.setState({ data: { ...data, description: e.target.value } })
+		this.setState({
+			data: { ...data, description: e.target.value },
+			valid: true,
+		})
 	}
 
 	handleDescriptionChange = (e) => {
 		const { data } = this.state;
-		this.setState({ data: { ...data, tags: e.target.value } })
+		this.setState({
+			data: { ...data, tags: e.target.value },
+			valid: true,
+		})
 	}
 
 	render() {
