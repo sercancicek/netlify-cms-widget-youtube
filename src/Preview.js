@@ -24,10 +24,10 @@ export default class Preview extends React.Component {
 
 	render() {
 		const value = this.props.value;
+		console.log({value});
 		const { url, id, mediaType, provider = "youtube" } = value;
 		const { imageURL = "" } = this.getImage({ url, id, mediaType, provider });
 
-		console.log({value});
 
 		return (
 			<div className="yt-widgetPreview">
@@ -48,3 +48,37 @@ export default class Preview extends React.Component {
 Preview.propTypes = {
 	value: PropTypes.node
 };
+
+/*
+const value = this.props.value
+		let { entries } = this.props.value._root
+		if (!entries) {
+			entries = this.props.value._root.nodes.map(x => x.entry)
+		}
+
+		let tags = entries.find(x => x.includes("tags"))[1]
+		if (tags && tags._tail) {
+			tags = tags._tail.array.join()
+		}
+
+		return (
+			<div className="yt-widgetPreview">
+				<span>
+					URL: {entries.find(x => x.includes("url"))[1]}
+				</span>
+				<span>
+					Title: {entries.find(x => x.includes("title"))[1]}
+				</span>
+				<span>
+					Description: {entries.find(x => x.includes("description"))[1]}
+				</span>
+				<span>
+					Published At: {entries.find(x => x.includes("publishedAt"))[1]}
+				</span>
+				<span>
+					View: {entries.find(x => x.includes("viewCount"))[1]}
+				</span>
+			</div>
+		);
+	} 
+*/
