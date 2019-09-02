@@ -25,8 +25,6 @@ export default class Preview extends React.Component {
 	render() {
 		const value = this.props.value;
 		console.log({value});
-		const { url, id, mediaType, provider = "youtube" } = value;
-		const { imageURL = "" } = this.getImage({ url, id, mediaType, provider });
 
 		if (value) {
 			let { entries } = this.props._root
@@ -59,6 +57,9 @@ export default class Preview extends React.Component {
 				</div>
 			);
 		}
+
+		const { url, id, mediaType, provider = "youtube" } = value;
+
 		return (
 			<div className="yt-widgetPreview">
 				{JSON.stringify(value)}
