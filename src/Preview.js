@@ -27,9 +27,9 @@ export default class Preview extends React.Component {
 		console.log({value});
 
 		if (!value) {
-			let { entries } = this.props._root
-			if (!entries) {
-				entries = this.props.value._root.nodes.map(x => x.entry)
+			let { nodes } = this.props.entry._root
+			if (!nodes) {
+				entries = nodes.map(x => x.entry)
 			}
 	
 			let tags = entries.find(x => x.includes("tags"))[1]
