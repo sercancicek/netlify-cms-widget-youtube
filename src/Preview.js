@@ -28,7 +28,7 @@ export default class Preview extends React.Component {
 		const { url, id, mediaType, provider = "youtube" } = value;
 		const { imageURL = "" } = this.getImage({ url, id, mediaType, provider });
 
-		if (!value) {
+		if (value) {
 			let { entries } = this.props._root
 			if (!entries) {
 				entries = this.props.value._root.nodes.map(x => x.entry)
