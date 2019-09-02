@@ -26,7 +26,7 @@ export default class Preview extends React.Component {
 		const value = this.props.value;
 		console.log({value});
 
-		if (value) {
+		if (!value) {
 			let { entries } = this.props._root
 			if (!entries) {
 				entries = this.props.value._root.nodes.map(x => x.entry)
