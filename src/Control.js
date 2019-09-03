@@ -27,7 +27,7 @@ export default class Control extends React.Component {
 		console.log({ xx: this.props.value });
 		console.log({ yy: this.props.field });
 		console.log({ zz: this.props.field.get('title') });
-		if (this.props.value === '') {
+		if (this.props.value === '' ) {
 			return
 		}
 		let entries;
@@ -49,10 +49,12 @@ export default class Control extends React.Component {
 				},
 				valid: true,
 			})
+			return
 		} else if (this.props.entry) {
 			const { entry } = this.props
 			const innerObj = entry.find(x => x.entry[0] === 'data')
 			entries = innerObj.entry[1]._root.nodes.map(x => x.entry)
+			return
 		} else {
 			entries = this.props.value._root.entries
 		}
