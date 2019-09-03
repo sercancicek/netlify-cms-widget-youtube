@@ -29,6 +29,7 @@ export default class Control extends React.Component {
 		if (this.props.value === '' || typeof this.props.value !== 'object') {
 			return
 		}
+		let entries;
 		if (this.props.value.title) {
 			const { value } = this.props;
 			this.setState({
@@ -47,10 +48,14 @@ export default class Control extends React.Component {
 				},
 				valid: true,
 			})
+		} else if (this.props.entry) {
+			const { entry } = this.props
+			const innerObj = entry.find(x => x.entry[0] === 'data')
+			entries = innerObj.entry[1]._root.nodes.map(x => x.entry)
+		} else {
+			entries = this.props.value._root.entries
 		}
-		let { entries } = this.props.value._root
 		console.log({ 11: entries });
-		// const entries = nodes.map(n => n.entries || n.entry)
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
