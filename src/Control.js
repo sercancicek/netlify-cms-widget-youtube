@@ -6,6 +6,7 @@ import urlParser from "js-video-url-parser";
 export default class Control extends React.Component {
 	constructor(props) {
 		super(props);
+		console.log({aaaxxx: props});
 		this.state = { valid: false, data: {} };
 	}
 	static propTypes = {
