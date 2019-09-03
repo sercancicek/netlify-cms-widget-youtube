@@ -38,7 +38,12 @@ export default class Preview extends React.Component {
 				return (<div></div>)
 			}
 			console.log({2: 2, entries});
-	
+			if (entries.nodes && entries.nodes.length > 0) {
+				const node = entries.nodes.find(x => x.entry[0] === 'data')
+				if (node) {
+					entries = node[1]._root.nodes
+				}
+			}
 			let tags = entries.find(x => x.includes("tags"))[1]
 			if (tags && tags._tail) {
 				tags = tags._tail.array.join()
