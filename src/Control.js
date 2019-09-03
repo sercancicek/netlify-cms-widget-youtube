@@ -62,6 +62,7 @@ export default class Control extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const { data, valid } = this.state;
+		console.log({data, data2: prevState.data});
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
 			try {
@@ -119,7 +120,7 @@ export default class Control extends React.Component {
 			this.setState({ valid: false });
 		}
 
-		this.writeOut(e);
+		// this.writeOut(e);
 	};
 
 	writeOut = e => {
