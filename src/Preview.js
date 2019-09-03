@@ -8,7 +8,7 @@ export default class Preview extends React.Component {
 		this.state = {
 			videoInfo: {}
 		};
-		console.log({ props });
+		console.log({props});
 
 	}
 
@@ -24,12 +24,12 @@ export default class Preview extends React.Component {
 
 	render() {
 		const value = this.props.value;
-		console.log({ value });
+		console.log({value});
 		let entries;
 		if (!value) {
-			console.log({ 1: 1, qq: this.props });
+			console.log({1: 1, qq: this.props});
 			let { nodes } = this.props.entry._root
-			console.log({ 2: 2, nodes });
+			console.log({2: 2, nodes});
 
 			if (!nodes) {
 				entries = nodes.map(x => x.entry)
@@ -37,13 +37,13 @@ export default class Preview extends React.Component {
 			if (!entries) {
 				return (<div></div>)
 			}
-			console.log({ 2: 2, entries });
-
+			console.log({2: 2, entries});
+	
 			let tags = entries.find(x => x.includes("tags"))[1]
 			if (tags && tags._tail) {
 				tags = tags._tail.array.join()
 			}
-
+	
 			return (
 				<div className="yt-widgetPreview">
 					<span>
@@ -69,7 +69,7 @@ export default class Preview extends React.Component {
 
 		return (
 			<div className="yt-widgetPreview">
-				{entries.find(x => x.includes("title"))[1]}
+				{JSON.stringify(value)}
 			</div>
 		);
 	}
@@ -110,5 +110,5 @@ const value = this.props.value
 				</span>
 			</div>
 		);
-	}
+	} 
 */

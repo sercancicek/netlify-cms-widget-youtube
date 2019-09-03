@@ -29,6 +29,25 @@ export default class Control extends React.Component {
 		if (this.props.value === '' || typeof this.props.value !== 'object') {
 			return
 		}
+		if (this.props.value.title) {
+			const { value } = this.props;
+			this.setState({
+				data: {
+					url: value.url,
+					title: value.title,
+					description: value.description,
+					publishedAt: value.publishedAt,
+					tags: value.tags,
+					viewCount: value.viewCount,
+					thumbnails: {
+						default: {
+							url: value.imageURL,
+						}
+					}
+				},
+				valid: true,
+			})
+		}
 		let { entries } = this.props.value._root
 		console.log({ 11: entries });
 		// const entries = nodes.map(n => n.entries || n.entry)
