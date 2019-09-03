@@ -26,7 +26,7 @@ export default class Control extends React.Component {
 		console.log({ xx: this.props.value });
 		console.log({ yy: this.props.field });
 		console.log({ zz: this.props.field.get('title') });
-		if (this.props.value === '' || typeof this.props.value !== 'object') {
+		if (this.props.value === '') {
 			return
 		}
 		let entries;
