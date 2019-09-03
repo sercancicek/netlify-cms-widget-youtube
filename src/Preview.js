@@ -48,7 +48,7 @@ export default class Preview extends React.Component {
 			if (tags && tags._tail) {
 				tags = tags._tail.array.join()
 			}
-	
+			console.log({3: 3, entries});
 			return (
 				<div className="yt-widgetPreview">
 					<span>

@@ -93,11 +93,11 @@ export default class Control extends React.Component {
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
 			try {
-				const { id, provider, mediaType } = urlParser.parse(data.url);
+				// const { id, provider, mediaType } = urlParser.parse(data.url);
 				this.props.onChange({
 					url: data.url,
-					id: id,
-					mediaType: mediaType,
+					// id: id,
+					// mediaType: mediaType,
 					imageURL: data.thumbnails.default.url,
 					title: data.title,
 					description: data.description,
