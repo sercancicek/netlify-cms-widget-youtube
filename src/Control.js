@@ -198,7 +198,7 @@ export default class Control extends React.Component {
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
 		console.log({ data });
-		const srcImgUrl = data.thumbnails.maxres ?
+		const srcImgUrl = data.thumbnails && data.thumbnails.maxres ?
 			data.thumbnails.maxres.url : data.thumbnails.default.url
 		return (
 			<div id={forID} className={classNameWrapper}>
