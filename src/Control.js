@@ -198,12 +198,14 @@ export default class Control extends React.Component {
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
 		console.log({ data });
+		const srcImgUrl = data.thumbnails.maxres ?
+			data.thumbnails.maxres.url : data.thumbnails.default.url
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
 					data.title &&
 					<img
-						src={data.thumbnails && data.thumbnails.maxres.url}
+						src={srcImgUrl}
 						style={{
 							width: 120,
 							height: 67.5,
