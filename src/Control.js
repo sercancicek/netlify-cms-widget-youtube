@@ -92,13 +92,15 @@ export default class Control extends React.Component {
 		console.log({data, data2: prevState.data});
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
+			const imageURL =  data.thumbnails.high ?
+				data.thumbnails.high.url :  data.thumbnails.default.url
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
 				this.props.onChange({
 					url: data.url,
 					id: id,
 					mediaType: mediaType,
-					imageURL: data.thumbnails.default.url,
+					imageURL: imageURL,
 					title: data.title,
 					description: data.description,
 					publishedAt: data.publishedAt,
@@ -198,14 +200,12 @@ export default class Control extends React.Component {
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
 		console.log({ data });
-		const srcImgUrl = data.thumbnails && (data.thumbnails.maxres ?
-			data.thumbnails.maxres.url : data.thumbnails.high.url)
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
 					data.title &&
 					<img
-						src={srcImgUrl}
+						src={data.thumbnails && data.thumbnails.default.url}
 						style={{
 							width: 120,
 							height: 67.5,
