@@ -199,7 +199,7 @@ export default class Control extends React.Component {
 		const { data } = this.state;
 		console.log({ data });
 		const srcImgUrl = data.thumbnails && (data.thumbnails.maxres ?
-			data.thumbnails.maxres.url : data.thumbnails.default.url)
+			data.thumbnails.maxres.url : data.thumbnails.high.url)
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
