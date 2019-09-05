@@ -203,7 +203,7 @@ export default class Control extends React.Component {
 				{
 					data.title &&
 					<img
-						src={data.thumbnails && data.thumbnails.default.url}
+						src={data.thumbnails && data.thumbnails.maxres.url}
 						style={{
 							width: 120,
 							height: 67.5,
