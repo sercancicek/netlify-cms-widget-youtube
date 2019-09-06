@@ -28,10 +28,12 @@ export default class Control extends React.Component {
 		console.log({ yy: this.props.field });
 		console.log({ zz: this.props.field.get('title') });
 		const required = this.props.field.get("required") || 'true';
-		
+		console.log({ssssadadad: this.props, required});
 		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
 			if (required === 'false') {
 				this.setState({ valid: true })
+				console.log({ssssadadad: this.state});
+
 			}
 			return
 		}
