@@ -27,7 +27,12 @@ export default class Control extends React.Component {
 		console.log({ xx: this.props.value });
 		console.log({ yy: this.props.field });
 		console.log({ zz: this.props.field.get('title') });
+		const required = this.props.field.get("required") || 'true';
+		
 		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
+			if (required === 'false') {
+				this.setState({ valid: true })
+			}
 			return
 		}
 		let entries;
@@ -295,7 +300,7 @@ export default class Control extends React.Component {
 					</label>
 					<textarea
 						id="description"
-						className={classNameWrapper} n
+						className={classNameWrapper}
 						style={{
 							backgroundColor: "#fff",
 							border: "2px solid #dfdfe3",
