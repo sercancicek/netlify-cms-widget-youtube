@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import urlParser from "js-video-url-parser";
-const APIKey = 'AIzaSyAln9Zizqc3_r8zozq4OcmqwwsUOXRJtuE'
 
 
 
