@@ -149,7 +149,7 @@ export default class Control extends React.Component {
 			this.setState({ valid: false });
 		}
 
-		this.writeOut(e);
+		// this.writeOut(e);
 	};
 
 	writeOut = e => {
