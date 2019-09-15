@@ -25,31 +25,24 @@ export default class Control extends React.Component {
 
 	componentDidMount() {
 		const required = this.props.field.get("required");
-		console.log({ssssadadad: this.props, required});
-		const { value } = this.props;
+		console.log('PROPS', this.props)
 		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
 			if (!required) {
 				this.setState({ valid: true })
-				console.log({ssssadadad: this.state});
-
 			}
 			return
 		}
 		let entries;
 		if (this.props.value.title) {
-			let tagsString
-			if (value && value.tags && Array.isArray(value.tags)){
-				tagsString = value.tags.join()
-			} else if (value && value.tags) {
-				tagsString = value.tags
-			}
+			const { value } = this.props;
+			console.log('VALUES', value)
 			this.setState({
 				data: {
 					url: value.url,
 					title: value.title,
 					description: value.description,
 					publishedAt: value.publishedAt,
-					tags: tagsString,
+					tags: Array.isArray(value.tags) ? value.tags.join() : value.tags,
 					viewCount: value.viewCount,
 					thumbnails: {
 						default: {
@@ -71,12 +64,9 @@ export default class Control extends React.Component {
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
-		// let tags = entries.find(x => x.includes("tags"))[1];
-		let tagsString
-		if (value.tags && Array.isArray(value.tags) && value){
-			tagsString = value.tags.join()
-		} else if (value.tags && value) {
-			tagsString= value.tags
+		let tags = entries.find(x => x.includes("tags"))[1];
+		if (tags && tags._tail) {
+			tags = tags._tail.array.join();
 		}
 		if (entries) {
 			this.setState({
@@ -85,7 +75,7 @@ export default class Control extends React.Component {
 					title: entries.find(x => x.includes("title"))[1],
 					description: entries.find(x => x.includes("description"))[1],
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
-					tags: tagsString,
+					tags: Array.isArray(tags) ? tags.join() : tags,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
 					thumbnails: {
 						default: {
@@ -114,7 +104,7 @@ export default class Control extends React.Component {
 					title: data.title,
 					description: data.description,
 					publishedAt: data.publishedAt,
-					tags: data.tags,
+					tags: Array.isArray(data.tags) ? data.tags.join() : data.tags,
 					viewCount: data.viewCount,
 				});
 			} catch (err) {
@@ -208,16 +198,6 @@ export default class Control extends React.Component {
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
-		console.log('dataaaaaa', data)
-		const { tags } = data;
-		let tagArray
-		if (tags && Array.isArray(tags)) {
-			tagArray = tags.join()
-		} else if (tags) {
-			tagArray = tags
-		}
-		console.log({tagArray, data})
-
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
@@ -359,7 +339,7 @@ export default class Control extends React.Component {
 						className={classNameWrapper}
 						placeholder="Anahtar Kelimeler"
 						style={{ width: "100%", fontSize: "1rem", marginBottom: "20px" }}
-						value={tagArray}
+						value={data.tags}
 						onChange={this.handleTagsChange}
 					/>
 				</div>
