@@ -23,51 +23,24 @@ export default class Preview extends React.Component {
 
 	render() {
 		const value = this.props.value;
-		let entries;
-		if (!value) {
-			let { nodes } = this.props.entry._root
-			if (!nodes) {
-				entries = nodes.map(x => x.entry)
+		let infoObj;
+		if(value) {
+			infoObj = {
+				url: value.url || '',
+				id: value.id || '',
+				mediaType: value.mediaType || '',
+				imageURL: value.imageURL || '',
+				title: value.title || '',
+				description: value.description || '',
+				publishedAt: value.publishedAt || '',
+				tags: Array.isArray(value.tags) ? value.tags.join() : tags,
+				viewCount: value.viewCount,
 			}
-			if (!entries) {
-				return (<div></div>)
-			}
-			if (entries.nodes && entries.nodes.length > 0) {
-				const node = entries.nodes.find(x => x.entry[0] === 'data')
-				if (node) {
-					entries = node[1]._root.nodes
-				}
-			}
-			let tags = entries.find(x => x.includes("tags"))[1]
-			if (tags && tags._tail) {
-				tags = tags._tail.array.join()
-			}
-			return (
-				<div className="yt-widgetPreview">
-					<span>
-						URL: {entries.find(x => x.includes("url"))[1]}
-					</span>
-					<span>
-						Title: {entries.find(x => x.includes("title"))[1]}
-					</span>
-					<span>
-						Description: {entries.find(x => x.includes("description"))[1]}
-					</span>
-					<span>
-						Published At: {entries.find(x => x.includes("publishedAt"))[1]}
-					</span>
-					<span>
-						View: {entries.find(x => x.includes("viewCount"))[1]}
-					</span>
-				</div>
-			);
 		}
-
-		const { url, id, mediaType, provider = "youtube" } = value;
-
+		console.log(infoObj)
 		return (
 			<div className="yt-widgetPreview">
-				{JSON.stringify(value)}
+				{JSON.stringify(infoObj)}
 			</div>
 		);
 	}
