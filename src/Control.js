@@ -37,13 +37,19 @@ export default class Control extends React.Component {
 		let entries;
 		if (this.props.value.title) {
 			const { value } = this.props;
+			let tagsString
+			if (tags && Array.isArray(tags)){
+				tagsString = tags.join()
+			} else if (tags) {
+				tagsString= value.tags
+			}
 			this.setState({
 				data: {
 					url: value.url,
 					title: value.title,
 					description: value.description,
 					publishedAt: value.publishedAt,
-					tags: value.tags,
+					tags: tagsString,
 					viewCount: value.viewCount,
 					thumbnails: {
 						default: {
@@ -66,8 +72,11 @@ export default class Control extends React.Component {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
 		let tags = entries.find(x => x.includes("tags"))[1];
-		if (tags && tags._tail) {
-			tags = tags._tail.array.join();
+		let tagsString
+		if (tags && Array.isArray(tags)){
+			tagsString = tags.join()
+		} else if (tags) {
+			tagsString= value.tags
 		}
 		if (entries) {
 			this.setState({
@@ -76,7 +85,7 @@ export default class Control extends React.Component {
 					title: entries.find(x => x.includes("title"))[1],
 					description: entries.find(x => x.includes("description"))[1],
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
-					tags,
+					tagsString,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
 					thumbnails: {
 						default: {
@@ -206,7 +215,7 @@ export default class Control extends React.Component {
 		} else if (tags) {
 			tagArray = tags
 		}
-		console.log({tagArray})
+		console.log({tagArray, data})
 
 		return (
 			<div id={forID} className={classNameWrapper}>
