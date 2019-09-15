@@ -3,10 +3,10 @@ import React from "react";
 import urlParser from "js-video-url-parser";
 
 
+
 export default class Control extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log({aaaxxx: props});
 		this.state = { valid: false, data: {} };
 	}
 	static propTypes = {
@@ -24,9 +24,6 @@ export default class Control extends React.Component {
 	};
 
 	componentDidMount() {
-		console.log({ xx: this.props.value });
-		console.log({ yy: this.props.field });
-		console.log({ zz: this.props.field.get('title') });
 		const required = this.props.field.get("required");
 		console.log({ssssadadad: this.props, required});
 		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
@@ -65,11 +62,9 @@ export default class Control extends React.Component {
 		} else {
 			entries = this.props.value._root.entries
 		}
-		console.log({ 11: entries });
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
-		 console.log({ 12: entries });
 		let tags = entries.find(x => x.includes("tags"))[1];
 		if (tags && tags._tail) {
 			tags = tags._tail.array.join();
@@ -96,7 +91,6 @@ export default class Control extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const { data, valid } = this.state;
-		console.log({data, data2: prevState.data});
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
 			const imageURL =  data.thumbnails.high ?
@@ -116,7 +110,6 @@ export default class Control extends React.Component {
 				});
 			} catch (err) {
 				console.error("Not a valid Youtube URL");
-				this.props.onChange(data.url);
 			}
 		}
 	}
@@ -124,7 +117,7 @@ export default class Control extends React.Component {
 	fetchFromAPI = e => {
 		const url = e.target.value;
 		const { id = "" } = urlParser.parse(url) || "";
-		const APIKey = this.props.field.get("APIkey");
+		// const APIKey = this.props.field.get("APIkey");
 		const data = fetch(
 			`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${id}&key=${APIKey}`
 		)
@@ -206,7 +199,12 @@ export default class Control extends React.Component {
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
-		console.log({ data });
+		const { tags } = data;
+		let tagArray
+		if (tags) {
+			tagArray = tags.join()
+		}
+		console.log(tagArray)
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
@@ -348,7 +346,7 @@ export default class Control extends React.Component {
 						className={classNameWrapper}
 						placeholder="Anahtar Kelimeler"
 						style={{ width: "100%", fontSize: "1rem", marginBottom: "20px" }}
-						value={data.tags}
+						value={tagArray}
 						onChange={this.handleTagsChange}
 					/>
 				</div>
