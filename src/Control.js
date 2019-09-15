@@ -73,9 +73,9 @@ export default class Control extends React.Component {
 		}
 		let tags = entries.find(x => x.includes("tags"))[1];
 		let tagsString
-		if (tags && Array.isArray(tags) && value){
+		if (value.tags && Array.isArray(value.tags) && value){
 			tagsString = tags.join()
-		} else if (tags && value) {
+		} else if (value.tags && value) {
 			tagsString= value.tags
 		}
 		if (entries) {
@@ -85,7 +85,7 @@ export default class Control extends React.Component {
 					title: entries.find(x => x.includes("title"))[1],
 					description: entries.find(x => x.includes("description"))[1],
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
-					tagsString,
+					tags: tagsString,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
 					thumbnails: {
 						default: {
