@@ -26,6 +26,7 @@ export default class Control extends React.Component {
 	componentDidMount() {
 		const required = this.props.field.get("required");
 		console.log({ssssadadad: this.props, required});
+		const { value } = this.props;
 		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
 			if (!required) {
 				this.setState({ valid: true })
@@ -36,12 +37,11 @@ export default class Control extends React.Component {
 		}
 		let entries;
 		if (this.props.value.title) {
-			const { value } = this.props;
 			let tagsString
-			if (tags && Array.isArray(tags)){
-				tagsString = tags.join()
-			} else if (tags) {
-				tagsString= value.tags
+			if (value && value.tags && Array.isArray(value.tags)){
+				tagsString = value.tags.join()
+			} else if (value && value.tags) {
+				tagsString = value.tags
 			}
 			this.setState({
 				data: {
