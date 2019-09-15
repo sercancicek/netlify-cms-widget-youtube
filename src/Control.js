@@ -206,6 +206,7 @@ export default class Control extends React.Component {
 		} else if (tags) {
 			tagArray = tags
 		}
+		console.log({tagArray})
 
 		return (
 			<div id={forID} className={classNameWrapper}>
