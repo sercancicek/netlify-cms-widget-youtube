@@ -203,7 +203,10 @@ export default class Control extends React.Component {
 		let tagArray
 		if (tags && Array.isArray(tags)) {
 			tagArray = tags.join()
+		} else if (tags) {
+			tagArray = tags
 		}
+		console.log({tagArray})
 
 		return (
 			<div id={forID} className={classNameWrapper}>
