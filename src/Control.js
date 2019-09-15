@@ -117,7 +117,7 @@ export default class Control extends React.Component {
 	fetchFromAPI = e => {
 		const url = e.target.value;
 		const { id = "" } = urlParser.parse(url) || "";
-		// const APIKey = this.props.field.get("APIkey");
+		const APIKey = this.props.field.get("APIkey");
 		const data = fetch(
 			`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${id}&key=${APIKey}`
 		)
@@ -201,10 +201,10 @@ export default class Control extends React.Component {
 		const { data } = this.state;
 		const { tags } = data;
 		let tagArray
-		if (tags) {
+		if (tags && Array.isArray(tags)) {
 			tagArray = tags.join()
 		}
-		console.log(tagArray)
+
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
