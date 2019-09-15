@@ -71,10 +71,10 @@ export default class Control extends React.Component {
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
-		let tags = entries.find(x => x.includes("tags"))[1];
+		// let tags = entries.find(x => x.includes("tags"))[1];
 		let tagsString
 		if (value.tags && Array.isArray(value.tags) && value){
-			tagsString = tags.join()
+			tagsString = value.tags.join()
 		} else if (value.tags && value) {
 			tagsString= value.tags
 		}
@@ -208,6 +208,7 @@ export default class Control extends React.Component {
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
+		console.log('dataaaaaa', data)
 		const { tags } = data;
 		let tagArray
 		if (tags && Array.isArray(tags)) {

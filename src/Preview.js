@@ -33,7 +33,7 @@ export default class Preview extends React.Component {
 				title: value.title || '',
 				description: value.description || '',
 				publishedAt: value.publishedAt || '',
-				tags: Array.isArray(value.tags) ? value.tags.join() : tags,
+				tags: Array.isArray(value.tags) ? value.tags.join() : value.tags,
 				viewCount: value.viewCount,
 			}
 		}
