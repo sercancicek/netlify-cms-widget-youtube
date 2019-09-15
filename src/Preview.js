@@ -24,7 +24,7 @@ export default class Preview extends React.Component {
 	render() {
 		const value = this.props.value;
 		let infoObj;
-		if(value) {
+		if(!!value) {
 			infoObj = {
 				url: value.url || '',
 				id: value.id || '',

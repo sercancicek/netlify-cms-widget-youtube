@@ -73,9 +73,9 @@ export default class Control extends React.Component {
 		}
 		let tags = entries.find(x => x.includes("tags"))[1];
 		let tagsString
-		if (tags && Array.isArray(tags)){
+		if (tags && Array.isArray(tags) && value){
 			tagsString = tags.join()
-		} else if (tags) {
+		} else if (tags && value) {
 			tagsString= value.tags
 		}
 		if (entries) {
