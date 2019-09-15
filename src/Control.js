@@ -203,6 +203,8 @@ export default class Control extends React.Component {
 		let tagArray
 		if (tags && Array.isArray(tags)) {
 			tagArray = tags.join()
+		} else if (tags) {
+			tagArray = tags
 		}
 
 		return (
