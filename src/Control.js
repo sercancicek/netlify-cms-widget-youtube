@@ -70,6 +70,7 @@ export default class Control extends React.Component {
 			tags = tags._tail.array.join();
 		}
 		if (entries) {
+			console.log({ suspected: entries});
 			const duration = entries.find(x => x && x.includes("duration"));
 			this.setState({
 				data: {
