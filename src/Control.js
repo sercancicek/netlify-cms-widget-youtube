@@ -32,7 +32,7 @@ export default class Control extends React.Component {
 			}
 			return
 		}
-		let entries;
+		let entries = [];
 		if (this.props.value.title) {
 			const { value } = this.props;
 			console.log('VALUES', value)
