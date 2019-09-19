@@ -67,11 +67,12 @@ export default class Control extends React.Component {
 		}
 
 		if (entries) {
+			console.log({ suspected: entries });
+
 			let tags = entries.find(x => x.includes("tags"))[1];
 			if (tags && tags._tail) {
 				tags = tags._tail.array.join();
 			}
-			console.log({ suspected: entries });
 			const duration = entries.find(x => x && x.includes("duration"));
 			this.setState({
 				data: {
