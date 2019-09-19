@@ -63,9 +63,9 @@ export default class Control extends React.Component {
 			entries = this.props.value._root.entries
 		}
 		if (!entries) {
-			 this.props.value._root.nodes.foreach(x => {
+			 this.props.value._root.nodes.forEach(x => {
 				if (!x.entry) {
-					x.nodes.foreach(y => entries.push(y.entry))
+					x.nodes.forEach(y => entries.push(y.entry))
 					return
 				}
 				 entries.push(x)
