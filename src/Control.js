@@ -63,7 +63,7 @@ export default class Control extends React.Component {
 			entries = this.props.value._root.entries
 		}
 		if (!entries) {
-			entries = this.props.value._root.nodes.map(x => x.entry)
+			entries = this.props.value._root.nodes.map(x => x.entry || x.nodes.map(y => y.entry))
 		}
 
 		if (entries) {
