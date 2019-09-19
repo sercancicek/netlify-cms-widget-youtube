@@ -44,6 +44,7 @@ export default class Control extends React.Component {
 					publishedAt: value.publishedAt,
 					tags: Array.isArray(value.tags) ? value.tags.join() : value.tags,
 					viewCount: value.viewCount,
+					duration: value.duration,
 					thumbnails: {
 						default: {
 							url: value.imageURL,
@@ -77,6 +78,7 @@ export default class Control extends React.Component {
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
 					tags: Array.isArray(tags) ? tags.join() : tags,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
+					duration: entries.find(x => x.includes("duration"))[1],
 					thumbnails: {
 						default: {
 							url: entries.find(x => x.includes("imageURL"))[1]
@@ -92,6 +94,7 @@ export default class Control extends React.Component {
 		const { data, valid } = this.state;
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
+			console.log({data});
 			const imageURL =  data.thumbnails.high ?
 				data.thumbnails.high.url :  data.thumbnails.default.url
 			try {
@@ -106,6 +109,7 @@ export default class Control extends React.Component {
 					publishedAt: data.publishedAt,
 					tags: Array.isArray(data.tags) ? data.tags.join() : data.tags,
 					viewCount: data.viewCount,
+					duration: data.duration,
 				});
 			} catch (err) {
 				console.error("Not a valid Youtube URL");
@@ -118,7 +122,7 @@ export default class Control extends React.Component {
 		const { id = "" } = urlParser.parse(url) || "";
 		const APIKey = this.props.field.get("APIkey");
 		const data = fetch(
-			`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${id}&key=${APIKey}`
+			`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${id}&key=${APIKey}`
 		)
 			.then(res => res.json())
 			.then(json => {
@@ -126,7 +130,7 @@ export default class Control extends React.Component {
 				if (json !== undefined) {
 					this.setState({
 						valid: true,
-						data: { ...json.items[0].snippet, ...json.items[0].statistics, url },
+						data: { ...json.items[0].snippet, ...json.items[0].statistics, ...json.items[0].contentDetails, url },
 					});
 				} else {
 					this.setState({ valid: false });

@@ -23,6 +23,7 @@ export default class Preview extends React.Component {
 
 	render() {
 		const value = this.props.value;
+		console.log({ xxxxx: value})
 		let infoObj;
 		if(!!value) {
 			infoObj = {
@@ -35,9 +36,9 @@ export default class Preview extends React.Component {
 				publishedAt: value.publishedAt || '',
 				tags: Array.isArray(value.tags) ? value.tags.join() : value.tags,
 				viewCount: value.viewCount,
+				duration: value.duration,
 			}
 		}
-		console.log(infoObj)
 		return (
 			<div className="yt-widgetPreview">
 				{JSON.stringify(infoObj)}
