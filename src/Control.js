@@ -70,6 +70,7 @@ export default class Control extends React.Component {
 			tags = tags._tail.array.join();
 		}
 		if (entries) {
+			const duration = entries.find(x => x.includes("duration"));
 			this.setState({
 				data: {
 					url: entries.find(x => x.includes("url"))[1],
@@ -78,7 +79,7 @@ export default class Control extends React.Component {
 					publishedAt: entries.find(x => x.includes("publishedAt"))[1],
 					tags: Array.isArray(tags) ? tags.join() : tags,
 					viewCount: entries.find(x => x.includes("viewCount"))[1],
-					duration: entries.find(x => x.includes("duration"))[1],
+					duration: duration ? duration[1] : '',
 					thumbnails: {
 						default: {
 							url: entries.find(x => x.includes("imageURL"))[1]
