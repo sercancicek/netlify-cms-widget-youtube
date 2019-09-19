@@ -26,7 +26,7 @@ export default class Control extends React.Component {
 	componentDidMount() {
 		const required = this.props.field.get("required");
 		console.log('PROPS', this.props)
-		if (this.props.value === '' || typeof this.props.value !== 'object' ) {
+		if (this.props.value === '' || typeof this.props.value !== 'object') {
 			if (!required) {
 				this.setState({ valid: true })
 			}
@@ -65,12 +65,13 @@ export default class Control extends React.Component {
 		if (!entries) {
 			entries = this.props.value._root.nodes.map(x => x.entry)
 		}
-		let tags = entries.find(x => x.includes("tags"))[1];
-		if (tags && tags._tail) {
-			tags = tags._tail.array.join();
-		}
+
 		if (entries) {
-			console.log({ suspected: entries});
+			let tags = entries.find(x => x.includes("tags"))[1];
+			if (tags && tags._tail) {
+				tags = tags._tail.array.join();
+			}
+			console.log({ suspected: entries });
 			const duration = entries.find(x => x && x.includes("duration"));
 			this.setState({
 				data: {
@@ -96,9 +97,9 @@ export default class Control extends React.Component {
 		const { data, valid } = this.state;
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
 		if (valid && hasDataChanged) {
-			console.log({data});
-			const imageURL =  data.thumbnails.high ?
-				data.thumbnails.high.url :  data.thumbnails.default.url
+			console.log({ data });
+			const imageURL = data.thumbnails.high ?
+				data.thumbnails.high.url : data.thumbnails.default.url
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
 				this.props.onChange({
