@@ -91,9 +91,12 @@ export default class Control extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		const { data, valid } = this.state;
 		const hasDataChanged = (JSON.stringify(data) !== JSON.stringify(prevState.data));
+		let imageURL
 		if (valid && hasDataChanged) {
-			const imageURL =  data.thumbnails.high ?
+			if (data.thumbnails) {
+				imageURL =  data.thumbnails.high ?
 				data.thumbnails.high.url :  data.thumbnails.default.url
+			}
 			try {
 				const { id, provider, mediaType } = urlParser.parse(data.url);
 				this.props.onChange({
@@ -148,13 +151,15 @@ export default class Control extends React.Component {
 			this.setState({ valid: false });
 		}
 
-		// this.writeOut(e);
+		this.writeOut(e);
 	};
 
 	writeOut = e => {
 		if (!this.props.field.get("extraInfo")) {
 			this.props.onChange(e.target.value);
 		}
+		this.props.onChange(e.target.value);
+
 	};
 
 	isValid = () => {
@@ -163,6 +168,7 @@ export default class Control extends React.Component {
 
 	handleTitleChange = (e) => {
 		const { data } = this.state;
+		console.log(e.target.value)
 		this.setState({
 			data: { ...data, title: e.target.value },
 			valid: true,
@@ -198,10 +204,11 @@ export default class Control extends React.Component {
 		const extraInfo = this.props.field.get("extraInfo");
 		const APIKey = this.props.field.get("APIkey");
 		const { data } = this.state;
+		console.log(data)
 		return (
 			<div id={forID} className={classNameWrapper}>
 				{
-					data.title &&
+					data.thumbnails && data.title &&
 					<img
 						src={data.thumbnails && data.thumbnails.default.url}
 						style={{
